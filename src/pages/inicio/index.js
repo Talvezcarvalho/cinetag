@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Banner from "../../componentes/Banner";
 import Card from "../../componentes/Card";
 import Titulo from "../../componentes/Titulo";
 import styles from './inicio.module.css';
+import { VideosContext } from "../../contextos/Videos";
 
 const Inicio = () => {
 
-    const [videos, setVideos] = useState([]);
+    const {videos} = useContext(VideosContext);
 
-    useEffect(() => {
-        fetch('https://my-json-server.typicode.com/Talvezcarvalho/cinetag-api/videos')
-        .then(resposta => resposta.json())
-        .then(dados => setVideos(dados))
-    }, []);
 
     return (
         <>

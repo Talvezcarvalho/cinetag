@@ -3,19 +3,16 @@ import Banner from '../../componentes/Banner'
 import Titulo from '../../componentes/Titulo'
 import styles from './player.module.css'
 import NaoEncontrada from '../NaoEncontrada';
-import { useEffect, useState } from 'react';
+import { useContext} from 'react';
+import { VideosContext } from '../../contextos/Videos';
 
 const Player = () => {
 
-    const [video, setVideo] = useState([]);
+    const { videos } = useContext(VideosContext);
+    console.log(videos);
     const parametros = useParams();
 
-    useEffect(() => {
-        fetch(`https://my-json-server.typicode.com/Talvezcarvalho/cinetag-api/videos?id=${parametros.id}`)
-        .then(resposta => resposta.json())
-        .then(dados => setVideo(...dados))
-    }, []);
-
+    const video = videos.find((video) => video.id === Number(parametros.id));
    
         if(!video) {
             return <NaoEncontrada/>
